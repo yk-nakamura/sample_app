@@ -45,6 +45,7 @@ gem 'therubyracer'
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara' 
+	gem 'libnotify', '0.8.0'
 end
 
 group :production do
@@ -54,6 +55,8 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+	gem 'spork-rails', '4.0.0'
+	gem 'childprocess', '0.3.6'
 end
 
-gem 'rspec'
+# gem 'rspec'
