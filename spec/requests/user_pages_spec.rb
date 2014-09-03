@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "User pages" do
+describe "User pages", :type => :request do
 
 	subject {page}
 
@@ -31,9 +31,9 @@ describe "User pages" do
 				before {click_button submit}
 				let(:user) {User.find_by(email: 'user@example.com')}
 
-				it {should have_link('Sign out')}
-				it {should have_title(user.name)}
-				it {should have_selector('div.alert.alert-success', text: 'Welcome')}
+				it {is_expected.to have_link('Sign out')}
+				it {is_expected.to have_title(user.name)}
+				it {is_expected.to have_selector('div.alert.alert-success', text: 'Welcome')}
 			end
 		end
 	end
@@ -41,16 +41,16 @@ describe "User pages" do
 	describe "signup page" do
 		before {visit signup_path}
 
-		it {should have_content('Sign up')}
-		it {should have_title(full_title('Sign up'))}
+		it {is_expected.to have_content('Sign up')}
+		it {is_expected.to have_title(full_title('Sign up'))}
 	end
 
 	describe "profile page" do
 		let(:user) {FactoryGirl.create(:user)}
 		before {visit user_path(user)}
 
-		it {should have_content(user.name)}
-		it {should have_title(user.name)}
+		it {is_expected.to have_content(user.name)}
+		it {is_expected.to have_title(user.name)}
 	end
 
 	describe "edit" do
@@ -61,15 +61,15 @@ describe "User pages" do
 		end
 
 		describe "page" do
-			it {should have_content("Update your profile")}
-			it {should have_title("Edit user")}
-			it {should have_link('change', href: 'http://gravatar.com/emails')}
+			it {is_expected.to have_content("Update your profile")}
+			it {is_expected.to have_title("Edit user")}
+			it {is_expected.to have_link('change', href: 'http://gravatar.com/emails')}
 		end
 
 		describe "with invalid information" do
 			before {click_button "Save changes"}
 
-			it {should have_content('error')}
+			it {is_expected.to have_content('error')}
 		end
 
 		describe "with valid information" do
@@ -83,9 +83,9 @@ describe "User pages" do
 				click_button "Save changes"
 			end
 
-			it {should have_title(new_name)}
-			it {should have_selector('div.alert.alert-success')}
-			it {should have_link('Sign out', href: signout_path)}
+			it {is_expected.to have_title(new_name)}
+			it {is_expected.to have_selector('div.alert.alert-success')}
+			it {is_expected.to have_link('Sign out', href: signout_path)}
 			specify {expect(user.reload.name).to eq new_name}
 			specify {expect(user.reload.email).to eq new_email}
 		end
