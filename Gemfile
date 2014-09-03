@@ -55,7 +55,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.13.1'
 	gem 'spork-rails', '4.0.0'
 	gem 'childprocess', '0.3.6'
 end
@@ -65,3 +65,5 @@ end
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
+
+gem 'minitest'
