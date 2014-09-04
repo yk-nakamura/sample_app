@@ -112,6 +112,17 @@ describe "User pages", :type => :request do
 			it {is_expected.to have_link('Sign out', href: signout_path)}
 			specify {expect(user.reload.name).to eq new_name}
 			specify {expect(user.reload.email).to eq new_email}
+
+			describe "forbidden attributes" do
+				let(:params) do
+					{user: {admin: true, password: user.password, password_confirmation: user.password}}
+				end
+				before do
+					sign_in user, no_capybara: true
+					patch user_path(user), params
+				end
+				specify {expect(user.reload).not_to be_admin}
+			end
 		end
 	end
 end

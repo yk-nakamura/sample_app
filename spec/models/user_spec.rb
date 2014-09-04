@@ -15,8 +15,10 @@ describe User, :type => :model do
 	it {is_expected.to respond_to(:password_confirmation)}
 	it {is_expected.to respond_to(:authenticate)}
 	it {is_expected.to respond_to(:remember_token)}
+	it {is_expected.to respond_to(:admin)}
 
 	it {is_expected.to be_valid}
+	it {should_not be_admin}
 
 	describe "when name is not present" do
 		before {@user.name = "\s"}
